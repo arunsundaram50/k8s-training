@@ -2,31 +2,31 @@
   "$docker-training/kd2/": {
     "key-file": null
   },
-  "$docker-training/day6/": {
+  "$docker-training/dd6/": {
     "key-file": null
   },
-  "$docker-training/day1/": {
+  "$docker-training/dd1/": {
     "key-file": null
   },
   "$docker-training/kd1/": {
     "key-file": null
   },
-  "$docker-training/day5/": {
+  "$docker-training/dd5/": {
     "key-file": null
   },
-  "$docker-training/day2/": {
+  "$docker-training/dd2/": {
     "key-file": null
   },
   "$docker-training/kd3/": {
     "key-file": null
   },
-  "$docker-training/day2a/": {
+  "$docker-training/dd2a/": {
     "key-file": null
   },
-  "$docker-training/day3/": {
+  "$docker-training/dd3/": {
     "key-file": null
   },
-  "$docker-training/day4/": {
+  "$docker-training/dd4/": {
     "key-file": null
   }
 }
