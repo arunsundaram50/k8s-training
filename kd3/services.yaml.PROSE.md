@@ -1,6 +1,6 @@
 ## Create a service
 - Create a service to expose the deployment, with another file named `service.yaml`
-- eploy the service using kubectl
+- Deploy the service using kubectl
 ```
 kubectl apply -f service.yaml
 ```
