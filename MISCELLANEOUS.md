@@ -1,4 +1,7 @@
 # Prerequisites
-## Familirize youself with the following utilities and commands
+## Familiarize youself with the following utilities and commands
 - git
+- GitHub
 - ssh
+## Get a GitHub account
+## Install Docker Desktop
