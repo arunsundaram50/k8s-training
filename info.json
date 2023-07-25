@@ -1,0 +1,32 @@
+{
+  "$docker-training/kd2/": {
+    "key-file": null
+  },
+  "$docker-training/day6/": {
+    "key-file": null
+  },
+  "$docker-training/day1/": {
+    "key-file": null
+  },
+  "$docker-training/kd1/": {
+    "key-file": null
+  },
+  "$docker-training/day5/": {
+    "key-file": null
+  },
+  "$docker-training/day2/": {
+    "key-file": null
+  },
+  "$docker-training/kd3/": {
+    "key-file": null
+  },
+  "$docker-training/day2a/": {
+    "key-file": null
+  },
+  "$docker-training/day3/": {
+    "key-file": null
+  },
+  "$docker-training/day4/": {
+    "key-file": null
+  }
+}

@@ -1,4 +1,4 @@
-# A "hello, world" Microservice with 'ephameral' request count
+# 2a. 'Ephameral' state
 
 ### Build the microservice image
 `docker image build -t arunsundaramco70/day2a .`

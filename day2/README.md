@@ -1,4 +1,4 @@
-# A simple "hello, world" Microservice 
+# 2. Building a Microservice 
 
 ### Build the microservice image
 `docker image build -t arunsundaramco70/day2 .`

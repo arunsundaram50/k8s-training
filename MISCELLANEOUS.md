@@ -1,4 +1,4 @@
-# Prerequisites
+# 0. Prerequisites
 ## Familiarize youself with the following utilities and commands
 - git
 - GitHub

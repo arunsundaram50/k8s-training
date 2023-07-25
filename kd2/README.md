@@ -1,4 +1,4 @@
-# Command Line Deployment and Service Creation
+# k2. Command Line Deployment and Service Creation
 ## Create a deployment
 
 ### make sure the image is in hub

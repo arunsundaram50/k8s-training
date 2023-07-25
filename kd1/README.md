@@ -1,4 +1,4 @@
-# Standalone Pods
+# k1. Standalone Pods
 
 ## Docker "alpine" images
 The term "Alpine" when used in Dockerfiles refers to Alpine Linux, which is a lightweight Linux distribution. The reason it is often used in Docker images is due to its minimalistic approach and small size. 
