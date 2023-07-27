@@ -1,17 +1,10 @@
-# Docker and Kubernetes Sessions
-Conduct training in docker
+# Docker and Kubernetes CKA Sessions
 
-## Warmup sessions
- - Day 1: Dockerizing a hello world Python application
- - Day 2: Dockerizing a hello world Microservice
- - Day 3: Saving state to external volume
- - Day 4: High-level concepts
-
-## Structured Sessions for [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
+## Sessions for [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 
 ### Storage 10%
-- [Understand storage classes, persistent volumes](1.1.md)
-- [Understand volume mode, access modes and reclaim policies for volumes](1.2.md)
+- [Understand storage classes, persistent volumes](#/show/%24docker-training%2Fcka-prep%2F1.1.md)
+- [Understand volume mode, access modes and reclaim policies for volumes](#/show/%24docker-training%2Fcka-prep%2F1.2.md)
 - Understand persistent volume claims primitive
 - Know how to configure applications with persistent storage
 
@@ -27,7 +20,7 @@ Conduct training in docker
 - Understand deployments and how to perform rolling update and rollbacks
 - Use ConfigMaps and Secrets to configure applications
 - Know how to scale applications
-- [Understand the primitives used to create robust, self-healing, application deployments](3.4.md)
+- [Understand the primitives used to create robust, self-healing, application deployments](#/show/%24docker-training%2Fcka-prep%2F3.4.md)
 - Understand how resource limits can affect Pod scheduling
 - Awareness of manifest management and common templating tools
 
