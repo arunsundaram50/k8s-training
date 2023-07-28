@@ -1,4 +1,4 @@
-# 2a. 'Ephameral' state
+# 2. 'Ephameral' state
 
 ### Build the microservice image
 `docker image build -t arunsundaramco70/day2a .`
