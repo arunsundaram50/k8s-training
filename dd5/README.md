@@ -21,3 +21,15 @@
 - prune
 - custom script using sed, awk to cleanup
 
+## Other Dockerfile commands
+- ARG
+- CMD: array preferred
+- ENV
+- ENTRYPOINT
+- HEALTHCHECK
+- LABEL
+- ONBUILD INSTRUCTION
+- STOPSIGNAL signal
+- USER daemon
+- VOLUME [ "/data" ]
+- WORKDIR /the/workdir/path
