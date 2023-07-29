@@ -1,9 +1,6 @@
-FROM python:3.9
+FROM python:alpine
 
 # RUN apt-get update && apt-get install -y python3-pip
-
-# additional configuration
-EXPOSE 8001
 
 # update the image with needed files
 COPY main.py main.py
@@ -13,4 +10,6 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # run the application
-CMD uvicorn main:app --reload --host 0.0.0.0 --port 8001
+CMD python3 ./main.py
+
+

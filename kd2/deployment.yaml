@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xyz-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: xyz
+  template:
+    metadata:
+      labels:
+        app: xyz
+    spec:
+      containers:
+      - name: xyz-container
+        image: arunsundaramco70/dd2
+        ports:
+        - containerPort: 8001

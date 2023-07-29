@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: xyz
+spec:
+  containers:
+    - name: webapp
+      image: arunsundaramco70/dd2
+      imagePullPolicy: Always
+      env: 
+        - name: PORT
+          value: "8001"

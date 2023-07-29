@@ -4,9 +4,14 @@ metadata:
   name: xyz-service
 spec:
   selector:
-    app: xyz
+    name: xyz
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8001
+      container: c1
+    - protocol: TCP
+      port: 8000
+      targetPort: 8002
+      container: c2
   type: LoadBalancer
