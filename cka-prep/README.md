@@ -4,12 +4,12 @@
 
 ### Storage 10%
 - [Understand storage classes, persistent volumes](./1.1.md)
-- [Understand volume mode, access modes and reclaim policies for volumes](#/show/%24docker-training%2Fcka-prep%2F1.2.md)
+- [Understand volume mode, access modes and reclaim policies for volumes](./1.2.md)
 - Understand persistent volume claims primitive
 - Know how to configure applications with persistent storage
 
 ### Troubleshooting 30%
-- [Evaluate cluster and node logging](#/show/%24docker-training%2Fcka-prep%2F2.1.md)
+- [Evaluate cluster and node logging](./2.1.md)
 - Understand how to monitor applications
 - Manage container stdout & stderr logs
 - Troubleshoot application failure
@@ -20,7 +20,7 @@
 - Understand deployments and how to perform rolling update and rollbacks
 - Use ConfigMaps and Secrets to configure applications
 - Know how to scale applications
-- [Understand the primitives used to create robust, self-healing, application deployments](#/show/%24docker-training%2Fcka-prep%2F3.4.md)
+- [Understand the primitives used to create robust, self-healing, application deployments](./3.4.md)
 - Understand how resource limits can affect Pod scheduling
 - Awareness of manifest management and common templating tools
 
