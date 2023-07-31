@@ -1,4 +1,4 @@
-# Docker and Kubernetes CKA Sessions
+# CKA Sessions
 
 ## Sessions for [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 

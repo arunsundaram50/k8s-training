@@ -40,5 +40,17 @@
   },
   "$docker-training/cka-prep/": {
     "key-file": null
+  },
+  "$docker-training/dd7/": {
+    "key-file": null
+  },
+  "$docker-training/dd8/": {
+    "key-file": null
+  },
+  "$docker-training/kd5/": {
+    "key-file": null
+  },
+  "$docker-training/ka1/": {
+    "key-file": null
   }
 }
