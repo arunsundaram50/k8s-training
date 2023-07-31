@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kd4-deployment
+  labels:
+    app: hello_app
+spec:
+  replicas: 1
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hello_app
+  template:
+    metadata:
+      labels:
+        app: hello_app
+    spec:
+      containers:
+      - name: hello-app-container
+        image: arunsundaramco70/app_v1
+        ports:
+        - containerPort: 8001
