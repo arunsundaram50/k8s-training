@@ -3,7 +3,7 @@
 ## Sessions for [CKA](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 
 ### Storage 10%
-- [Understand storage classes, persistent volumes](#./1.1.md)
+- [Understand storage classes, persistent volumes](./1.1.md)
 - [Understand volume mode, access modes and reclaim policies for volumes](#/show/%24docker-training%2Fcka-prep%2F1.2.md)
 - Understand persistent volume claims primitive
 - Know how to configure applications with persistent storage
