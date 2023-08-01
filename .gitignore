@@ -1,3 +1,5 @@
 __pycache__/
 venv_v1/
 demo/
+info.json
+./info.json
