@@ -1,8 +1,8 @@
 # 7. Docker Compose
 
 ## Why we need `docker_compose`?
-1. Individual images have to be built
-2. Running the images have to be properly coordinated
+1. Individual images have to be built one by one manually using `docker image build ...`
+2. Running the containers have to be properly coordinated, and dependencies managed
 3. Monitoring the containers is a huge task
 4. Containers are not able to `easily` talk to each other
 
@@ -22,7 +22,7 @@ docker-compose logs -f
 docker-compose up -v 
 ```
 
-Typically up also does a build if did not find the container images.
+Note: typically `docker-compose up` also does a build if the images needed aren't available. However, it seems like the images won't be updated if there are changes to the image's source materials.
 
 The `pause`, `stop`, and `down` commands in Docker Compose have different effects on containers, and here's an overview of what each one does:
 
@@ -69,6 +69,51 @@ This setup means that the contents of /usr/share/nginx/html inside the nginx con
 You can bring up the services defined in this file by running docker-compose up in the directory where the docker-compose.yml file is located. You can stop and remove the services (without removing the volume) by running docker-compose down.
 
 If you want to remove the volume as well when bringing down the services, you can run docker-compose down -v. Note that this will delete all the data in the volume.
+
+### Reading data off of the volume
+If you've got data in a Docker volume that was created using Docker Compose, and you want to export it to your host system, here's a general guideline on how you can do this.
+
+Suppose you have a volume mounted inside your container at `/data`. Here's how you could export the contents of that volume to a tar file on your host system:
+
+1. **Identify the Container using the Volume**: First, you'll need to figure out the name or ID of the container that's using the volume. You can do this using the `docker ps` command or by checking your `docker-compose.yml` file.
+
+2. **Open a Shell Inside the Container**: Execute a shell inside the container:
+
+   ```bash
+   docker exec -it <container_name_or_id> /bin/bash
+   ```
+
+   Replace `<container_name_or_id>` with the actual name or ID of the container.
+
+3. **Create a Tar File of the Data Inside the Container**: While inside the container's shell, you can create a tar file of the `/data` directory:
+
+   ```bash
+   tar cvf /data.tar /data
+   ```
+
+4. **Copy the Tar File to the Host**: Exit the container's shell, and then use the `docker cp` command to copy the tar file to your host system:
+
+   ```bash
+   docker cp <container_name_or_id>:/data.tar /path/to/host/directory
+   ```
+
+   Replace `/path/to/host/directory` with the actual path on your host system where you want to store the tar file.
+
+5. **Cleanup**: If you'd like, you can remove the tar file from inside the container using:
+
+   ```bash
+   docker exec -it <container_name_or_id> rm /data.tar
+   ```
+
+6. **Extract the Tar File on the Host**: Finally, you can extract the tar file on your host system using:
+
+   ```bash
+   tar xvf /path/to/host/directory/data.tar -C /path/to/extract/
+   ```
+
+That's it! The contents of the mounted volume are now on your host system.
+
+Remember to replace the paths and container names with those that are relevant to your specific setup. Make sure to have appropriate permissions and be aware that this method could potentially overwrite existing files in the target directory on your host system, so take necessary precautions!
 
 
 ## Cleaning up
