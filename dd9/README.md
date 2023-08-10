@@ -14,14 +14,15 @@
 - test
 - distribute
 
-## One need for k8s
-Docker provides restart policies which can be used to control whether our containers start automatically when they exit, or when Docker restarts. These are:
+## Based on our docker experience, what's the need for Kubernetes?
+#### Here is one
+Docker provides restart policies which can be used to control whether our containers start automatically when they exit, or whxen Docker restarts. These are:
 - no: This is the default policy. No action will be taken when a container stops.
 - always: This will always restart the container regardless of the exit status. The container will also be started on daemon startup, regardless of the current state.
 - on-failure: This will restart the container if the container exits with a non-zero exit status. We can optionally specify a maximum number of times Docker will try to restart the container.
 - unless-stopped: This will always restart the container unless it was manually stopped.
 
-```
+```bash
 docker run -d --restart always my_service
 ```
 In the above example, my_service will always restart if it crashes or if the docker daemon restarts.
