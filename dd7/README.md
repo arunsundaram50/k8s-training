@@ -1,15 +1,22 @@
 # 7. Docker Compose
 
-- Why we need `docker_compose`?
+## Why we need `docker_compose`?
+1. Individual images have to be built
+2. Running the images have to be properly coordinated
+3. Monitoring the containers is a huge task
+4. Containers are not able to `easily` talk to each other
+
 
 ## Common docker-compose commands
 ```
 docker-compose build
 docker-compose up
 docker-compose up -d
+
 docker-compose down
 docker-compose stop
 docker-compose pause
+
 docker-compose logs
 docker-compose logs -f
 docker-compose up -v 

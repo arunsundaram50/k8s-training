@@ -1,7 +1,7 @@
 import fastapi, os, uvicorn, nest_asyncio, random
 
 app = fastapi.FastAPI()
-PORT = os.environ.get('PORT', '8082')
+PORT = os.environ.get('PORT', '8080')
 random_number = random.randint(1, 100)
 
 @app.get("/upper/{text}")

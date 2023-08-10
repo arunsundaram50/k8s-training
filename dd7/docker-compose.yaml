@@ -3,17 +3,17 @@ services:
   app1:
     build: ./app1
     ports:
-      - "8081:8081" # Adjust the port mappings as needed
+      - "8081:8080" # Adjust the port mappings as needed
 
   app2:
     build: ./app2
     ports:
-      - "8082:8082" # Adjust the port mappings as needed
+      - "8082:8080" # Adjust the port mappings as needed
 
   app3:
     build: ./app3
     ports:
-      - "8083:8083" # Adjust the port mappings as needed
+      - "8083:8080" # Adjust the port mappings as needed
     depends_on:
       - app1
       - app2
