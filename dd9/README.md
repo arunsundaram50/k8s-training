@@ -26,4 +26,6 @@ Note: `restart: always` also makes sure the container starts after a host machin
 
 ### Kubernetes
 If we're running our containers on a Kubernetes platform, the Kubernetes platform ensures our pods (which contain our Docker containers) are always running. If a pod crashes, Kubernetes automatically starts a new pod to replace it.
+```
+In the example above, the host computer's `./my-data` is visible as `/data` by the container. The files written to (or read by) the container under the directory `/data` outlives the life-span of the container.
 

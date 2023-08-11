@@ -1,8 +1,8 @@
 # 7. Docker Compose
 
 ## Why we need `docker_compose`?
-1. Individual images have to be built
-2. Running the images have to be properly coordinated
+1. Individual images have to be built one by one manually using `docker image build ...`
+2. Running the containers have to be properly coordinated, and dependencies managed
 3. Monitoring the containers is a huge task
 4. Containers are not able to `easily` talk to each other
 
@@ -22,7 +22,7 @@ docker-compose logs -f
 docker-compose up -v 
 ```
 
-Typically up also does a build if did not find the container images.
+Note: typically `docker-compose up` also does a build if the images needed aren't available. However, it seems like the images won't be updated if there are changes to the image's source materials.
 
 The `pause`, `stop`, and `down` commands in Docker Compose have different effects on containers, and here's an overview of what each one does:
 
@@ -46,7 +46,6 @@ The `pause`, `stop`, and `down` commands in Docker Compose have different effect
    - Using `down` means that you'll need to create and start the containers again with `docker-compose up`.
 
 In summary, `pause` freezes the containers without stopping them, `stop` halts the containers without removing them, and `down` stops and removes the containers (and can also remove networks and volumes).
-
 
 ## Cleaning up
 Docker containers, images, and other resources can accumulate over time and eat up your system's disk space. Here's how you can find and remove old containers that are no longer needed.

@@ -1,16 +1,13 @@
-# 8. Mounting volumes
+# 8. Docker Volumes
 
 ## Mounting bind volumes
 ```
   app1:
     build: ./app1
-    ports:
-      - "8081:8080" # Adjust the port mappings as needed
     volumes:
-      - ./my-data:/data
+      ./my-data:/data
 ```
-In the example above, the host computer's `./my-data` is visible as `/data` by the container. The files written to (or read by) the container under the directory `/data` outlives the life-span of the container.
-
+In the example above, the host machine's ./my-data folder is 'seen' by the container as /data. Any file the container writes in the /data directory outlives the life of the container.
 
 ## Mounting docker managed volumes
 ```
@@ -34,4 +31,3 @@ This setup means that the contents of `/usr/share/nginx/html` inside the nginx c
 You can bring up the services defined in this file by running docker-compose up in the directory where the docker-compose.yml file is located. You can stop and remove the services (without removing the volume) by running docker-compose down.
 
 If you want to remove the volume as well when bringing down the services, you can `run docker-compose down -v`. Note that this will delete all the data in the volume.
-
