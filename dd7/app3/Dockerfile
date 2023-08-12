@@ -1,6 +1,7 @@
 FROM python:alpine
 
 # RUN apt-get update && apt-get install -y python3-pip
+EXPOSE 8080
 
 # update the image with needed files
 COPY greet_in_upper.py greet_in_upper.py

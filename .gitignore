@@ -1,5 +1,7 @@
 __pycache__/
-venv_v1/
 demo/
 info.json
 ./info.json
+venv_v1/
+*/venv_v1/
+**/venv_v1/

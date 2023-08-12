@@ -1,4 +1,34 @@
-# k2. Command Line Deployment and Service Creation
+# k2. [Services](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
+### ClusterIP
+Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default that is used if you don't explicitly specify a type for a Service. You can expose the Service to the public internet using an Ingress or a Gateway.
+### NodePort
+Exposes the Service on each Node's IP at a static port (the NodePort). To make the node port available, Kubernetes sets up a cluster IP address, the same as if you had requested a Service of type: ClusterIP.
+### LoadBalancer
+Exposes the Service externally using an external load balancer. Kubernetes does not directly offer a load balancing component; you must provide one, or you can integrate your Kubernetes cluster with a cloud provider.
+### ExternalName
+Maps the Service to the contents of the externalName field (for example, to the hostname api.foo.bar.example). The mapping configures your cluster's DNS server to return a CNAME record with that external hostname value. No proxying of any kind is set up.
+
+
+## Create a service
+- Create a service to expose the deployment, with another file named `service.yaml`
+- Deploy the service using kubectl
+```
+kubectl apply -f service.yaml
+```
+
+Now, our webapp should be accessible from a browser at localhost:30000. The reason we're able to access it on port 30000 is due to the service type being "NodePort", which exposes the service on a static port on each node. In a production setting, we would typically use a different service type, such as LoadBalancer or Ingress, to expose our application.
+
+Note: The `port` field in the service manifest determines the port number on which the service itself is exposed internally within the Kubernetes cluster. It is essentially the port that other services or applications within the cluster will use to communicate with this service.
+
+The specification is as follows:
+
+- `port`: This is the port that will be exposed by the service, i.e., the port that other services in the cluster will use to communicate with this service.
+- `targetPort`: This is the port on the pod where the application is running and listening for incoming requests. It's the port that the service will forward requests to.
+- `nodePort`: This is the port on each node where the service will be exposed. External traffic coming into the cluster will come in through this port.
+
+Here, `port: 80` means that within the Kubernetes cluster, other services or applications would reach our `myhello-service` on port 80. This port could be any valid port number (not necessarily matching the `targetPort`) as per our application architecture and communication plan within the Kubernetes cluster.
+
+# Command Line Deployment and Service Creation
 ## Create a deployment
 
 ### make sure the image is in hub

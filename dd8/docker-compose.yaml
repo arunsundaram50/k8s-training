@@ -3,15 +3,15 @@ services:
   app1:
     build: ./app1
     volumes:
-      ./my-data:/data
+      - ./my-data:/data
   app2:
     build: ./app2
     volumes:
-      ./my-data:/data
+      - ./my-data:/data
   app3:
     build: ./app3
     volumes:
-      ./my-data:/data
+      - ./my-data:/data
     ports:
       - "8080:8080"
     depends_on:
