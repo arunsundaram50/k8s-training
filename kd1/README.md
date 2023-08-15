@@ -80,5 +80,7 @@ kubectl describe deployment my-deployment
 kubectl delete deployment my-deployment
 # or
 kubectl delete -f deployment.yaml
+```
+
 
 ```
