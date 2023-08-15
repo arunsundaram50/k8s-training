@@ -1,18 +1,74 @@
-# k1. Standalone Pods
+# Various "levels" of running `main.py`
 
-## Docker "alpine" images
-The term "Alpine" when used in Dockerfiles refers to Alpine Linux, which is a lightweight Linux distribution. The reason it is often used in Docker images is due to its minimalistic approach and small size. 
+## Runnning it as a Python script
+```bash
+python3 ./main.py
+```
+### Main issues (from Operators perspective):
+| Issue | Host | Venv | Docker | K8S (imp)| K8S (dec) |
+|-|-|-|-|-|-|
+|Disowning Library Installation |x|x|√|
+|If using Python, user will have to use virtual environment to avoid library conflict with other applications running in the same host/machine|x|√|√|
+|||Creating §1||
+|Runs in an environment seperate from the host|x|√|√|
+|Oversight to bring service back up (if it crashes)|x|x|x|
+|There is oversight if it behaves badly (like take 100% CPU)|x|x|√|
+|There is way to scale it up|x|x|x|
+|Even if I run multiple instances to cope with the demand, scaling down is still manual|x|x|x|
+|Updating the application causes downtime|x|x|x|
 
-The key characteristics of Alpine Linux are:
+§1: 
+```bash
+python3 -m venv venv_v1
+source venv_v1/bin/activate
+python3 ./main.py
+```
+ 
+## Run it as a Docker container
+- In order to run it as a container, we first have to define a `Dockerfile` which describes (declaratively lists) how the image has to be built (typically by developers)
+```bash
+docker image build -t arunsundaramco70/kd1 .
+docker image push arunsundaramco70/kd1
+```
+- The devops folks can use/run this image, like so:
+```bash
+docker container run arunsundaramco70/kd1
+```
+Gotchas
+- The command `docker container run arunsundaramco70/kd1` runs a container it a different network as compared to the host machine's network.
+- In order to communicate with the container, we will have to port-forward, like so:
+```bash
+docker container run -p8001:8001 arunsundaramco70/kd1 
+docker container run -p8002:8001 arunsundaramco70/kd1 
+```
+- To limit resource usage, one can specifiy the limits. For instance, to limit CPU, one can do like so:
+```bash
+docker container run -p8001:8001 --cpu-shares=10 arunsundaramco70/kd1 
+```
 
-1. **Size**: It's really small, around 5MB in its base image form. This is an order of magnitude smaller than most other Linux distributions. The advantage of a smaller image is that it is faster to pull from the registry, uses less storage, and is quicker to deploy, all of which makes the overall development and deployment process faster and more efficient.
+## Running application in K8S (imperative)
+```bash
+kubectl run kd1 --image=arunsundaramco70/kd1 --port 8001 --labels app=kd1
+kubectl port-forward pod/kd1 8001
+```
 
-2. **Security**: Alpine Linux is designed to be secure by default. It uses the musl libc (a C library intended for operating systems) and a hardened kernel to reduce the risk of security vulnerabilities. It also minimizes the number of installed packages to limit the attack surface.
+## Running the application using a object declared in an YAML file
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3 # POD replicas
+  selector:
+    matchLabels:
+      app: my-pod
+  template: # POD template
+    metadata:
+      labels:
+        app: my-pod # POD label
+    spec: # Container specifications
+      containers:
+      - name: my-container
 
-3. **Resource Efficiency**: Its lightweight nature means it requires fewer resources to run, which can reduce costs and improve performance, especially in environments where resources are limited, such as embedded systems or cloud-based applications.
-
-4. **Package Management**: Alpine Linux uses its own package management system, `apk`, which is easy to use and includes features like package installation with dependency resolution and rollback functionality.
-
-5. **Simplicity**: Its simple design makes it easier to configure and manage, making it ideal for Docker containers where the environment needs to be tightly controlled.
-
-Therefore, when you see a Dockerfile's base image specifying something like `FROM python:3.9-alpine`, it means that the Python environment is being built on top of Alpine Linux, providing all of the advantages listed above.
+```
