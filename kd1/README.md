@@ -72,3 +72,13 @@ spec:
       - name: my-container
 
 ```
+```bash
+kubectl apply -f deployment.yaml
+kubectl get deployment my-deployment
+kubectl get pods
+kubectl describe deployment my-deployment
+kubectl delete deployment my-deployment
+# or
+kubectl delete -f deployment.yaml
+
+```
