@@ -1,3 +1,6 @@
 go 1.20
 
-use ./g/gd1
+use (
+	./g/gd1
+	./g/gd2-tee
+)
