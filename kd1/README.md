@@ -91,3 +91,16 @@ kubectl delete -f deployment.yaml
 
 ## 5) Fronting the applicaiton with a service
 Though we created a set of pods, we are not able to reach it. This is where Service comes in.
+Find the Cluster-IP like so:
+```bash
+kubectl get service xyz-service
+```
+Here is a sample output:
+```txt
+NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+xyz-service   LoadBalancer   10.99.206.163   localhost     8000:30146/TCP   17d
+```
+For this example, you can reach the application like so:
+```
+http://localhost:8000/hello
+```

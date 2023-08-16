@@ -15,3 +15,5 @@ spec:
       containers:
       - name: my-container
         image: arunsundaramco70/kd1
+        imagePullPolicy: Always
+
