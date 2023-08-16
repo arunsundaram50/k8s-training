@@ -1,4 +1,4 @@
-# Config Maps
+# kd3: Config Maps
 
 ## Create and apply the ConfigMap
 ```bash

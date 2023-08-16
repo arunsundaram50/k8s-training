@@ -1,4 +1,124 @@
-# k2. [Services](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
+# kd2: Running a simple application
+
+We will see how to run a simple Python application `main.py` that serves one simple endpoint `/hello`.
+
+Instead of jumping right into k8s, we will deploy the application starting in a simple way and incrementally we will do a k8s deploy. This will help us in many ways
+- allow us to test the application before making it part of a k8s deploy
+- when issue occur, we would know the problem is likely to be the incremental steps
+- help us understand what we gain with the increased complexity and what k8s is offerning us
+
+## 1) Runnning it as a Python script
+```bash
+python3 ./main.py
+```
+### Main issues (from Operators perspective):
+| Issue | Host | Venv | Docker | K8S (imp)| K8S (dec) |
+|-|-|-|-|-|-|
+|Disowning Library Installation |x|x|√|
+|If using Python, user will have to use virtual environment to avoid library conflict with other applications running in the same host/machine|x|√|√|
+|||Creating §1||
+|Runs in an environment seperate from the host|x|√|√|
+|Oversight to bring service back up (if it crashes)|x|x|x|
+|There is oversight if it behaves badly (like take 100% CPU)|x|x|√|
+|There is way to scale it up|x|x|x|
+|Even if I run multiple instances to cope with the demand, scaling down is still manual|x|x|x|
+|Updating the application causes downtime|x|x|x|
+
+§1: 
+```bash
+python3 -m venv venv_v1
+source venv_v1/bin/activate
+python3 ./main.py
+```
+ 
+## 2) Run it as a Docker container
+- In order to run it as a container, we first have to define a `Dockerfile` which describes (declaratively lists) how the image has to be built (typically by developers)
+```bash
+docker image build -t arunsundaramco70/kd1 .
+docker image push arunsundaramco70/kd1
+```
+- The devops folks can use/run this image, like so:
+```bash
+docker container run arunsundaramco70/kd1
+```
+Gotchas
+- The command `docker container run arunsundaramco70/kd1` runs a container it a different network as compared to the host machine's network.
+- In order to communicate with the container, we will have to port-forward, like so:
+```bash
+docker container run -p8001:8001 arunsundaramco70/kd1 
+docker container run -p8002:8001 arunsundaramco70/kd1 
+```
+- To limit resource usage, one can specifiy the limits. For instance, to limit CPU, one can do like so:
+```bash
+docker container run -p8001:8001 --cpu-shares=10 arunsundaramco70/kd1 
+```
+
+## 3) Running application in K8S (imperative)
+```bash
+kubectl run kd1 --image=arunsundaramco70/kd1 --port 8001 --labels app=kd1
+kubectl port-forward pod/kd1 8001
+```
+
+## 4) Running the application using a object declared in an YAML file
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3 # POD replicas
+  selector:
+    matchLabels:
+      app: my-pod
+  template: # POD template
+    metadata:
+      labels:
+        app: my-pod # POD label
+    spec: # Container specifications
+      containers:
+      - name: my-container
+```
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl get deployment my-deployment
+kubectl get pods
+kubectl describe deployment my-deployment
+kubectl delete deployment my-deployment
+# or
+kubectl delete -f deployment.yaml
+```
+
+## 5) Fronting the application with a service
+Though we created a set of pods, we are not able to reach it. This is where Service comes in.
+Apply the service
+```bash
+kubectl apply -f service.yaml
+```
+
+The specification is as follows:
+- `port`: This is the port that will be exposed by the service, i.e., the port that other services in the cluster will use to communicate with this service.
+- `targetPort`: This is the port on the pod where the application is running and listening for incoming requests. It's the port that the service will forward requests to.
+- `nodePort`: This is the port on each node where the service will be exposed. External traffic coming into the cluster will come in through this port.
+
+Here, `port: 80` means that within the Kubernetes cluster, other services or applications would reach our `myhello-service` on port 80. This port could be any valid port number (not necessarily matching the `targetPort`) as per our application architecture and communication plan within the Kubernetes cluster.
+
+
+Find the Cluster-IP like so:
+```bash
+kubectl get service xyz-service
+```
+Here is a sample output:
+```txt
+NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+xyz-service   LoadBalancer   10.99.206.163   localhost     8000:30146/TCP   17d
+```
+For this example, you can reach the application like so:
+```
+http://localhost:8000/hello
+```
+
+# [Services in detail](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
 
 ## Types of services
 ### ClusterIP
@@ -10,63 +130,3 @@ Exposes the Service externally using an external load balancer. Kubernetes does 
 ### ExternalName
 Maps the Service to the contents of the externalName field (for example, to the hostname api.foo.bar.example). The mapping configures your cluster's DNS server to return a CNAME record with that external hostname value. No proxying of any kind is set up.
 
-
-## Create a service
-- Create a service to expose the deployment, with another file named `service.yaml`
-- Deploy the service using kubectl
-```
-kubectl apply -f service.yaml
-```
-
-Now, our webapp should be accessible from a browser at localhost:30000. The reason we're able to access it on port 30000 is due to the service type being "NodePort", which exposes the service on a static port on each node. In a production setting, we would typically use a different service type, such as LoadBalancer or Ingress, to expose our application.
-
-Note: The `port` field in the service manifest determines the port number on which the service itself is exposed internally within the Kubernetes cluster. It is essentially the port that other services or applications within the cluster will use to communicate with this service.
-
-The specification is as follows:
-
-- `port`: This is the port that will be exposed by the service, i.e., the port that other services in the cluster will use to communicate with this service.
-- `targetPort`: This is the port on the pod where the application is running and listening for incoming requests. It's the port that the service will forward requests to.
-- `nodePort`: This is the port on each node where the service will be exposed. External traffic coming into the cluster will come in through this port.
-
-Here, `port: 80` means that within the Kubernetes cluster, other services or applications would reach our `myhello-service` on port 80. This port could be any valid port number (not necessarily matching the `targetPort`) as per our application architecture and communication plan within the Kubernetes cluster.
-
-# Command Line Deployment and Service Creation
-## Create a deployment
-
-### make sure the image is in hub
-```
-docker image build -t docker.io/arunsundaramco70/myhello .
-docker push docker.io/arunsundaramco70/myhello
-```
-
-### delete the standalone pod and create a deployment
-#### delete, if deployment exists:  kubectl delete deployment demo 
-```
-kubectl delete pod demo
-kubectl create deployment demo --image=arunsundaramco70/myhello --port 8888
-kubectl describe deployment demo
-```
-
-### List services, see no load balancer is running, and there is no way to reach 8888
-#### delete, if services aleady exists: kubectl delete services demo
-```
-kubectl get services
-```
-
-
-### Expose service without LB to 8888
-```
-kubectl expose deployment demo --type=NodePort --name=myhello-service --port=80 --target-port=8888
-```
-
-### Find the Cluster-IP & use the port and hit it from the browser 
-```
-kubectl get service myhello-service
-```
-For example, if you see
-```
-NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP        86m
-myhello-service   NodePort    10.104.191.51   <none>        80:30658/TCP   5m12s
-```
-we would hit <http://localhost:30658>

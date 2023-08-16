@@ -1,1 +1,1 @@
-# k4. DRY with Helm
+# kd4: Rolling updates
