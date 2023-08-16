@@ -1,3 +1,5 @@
+.metals/
+.vscode/
 __pycache__/
 demo/
 info.json

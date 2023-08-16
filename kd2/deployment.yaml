@@ -1,63 +1,18 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: hello-pod
-  labels:
-    app: hello-app
+  name: my-deployment
 spec:
-  containers:
-  - name: hello-container
-    image: arunsundaramco70/hello
-    ports:
-      - containerPort: 8001
-        name: http-web-svc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-service
-spec:
+  replicas: 3 # the specs below are for pod replicas
   selector:
-    app: hello-app
-  type: NodePort
-  ports:
-  - name: front-end-port
-    protocol: TCP
-    port: 8088
-    targetPort: http-web-svc
-    nodePort: 30088
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: upper
-  labels:
-    app: upper-app
-spec:
-  containers:
-  - name: upper-container
-    image: arunsundaramco70/upper
-    ports:
-      - containerPort: 8001
-        name: http-web-svc
-    env:
-      - name: "hello_host"
-        value: "hello-service"
-      - name: "hello_port"
-        value: "8088"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: upper-service
-spec:
-  selector:
-    app: upper-app
-  type: NodePort
-  ports:
-  - name: front-end-port
-    protocol: TCP
-    port: 8088
-    targetPort: http-web-svc
-    nodePort: 30089
+    matchLabels:
+      app: my-pod
+  template: # the specs below are for the pod
+    metadata:
+      labels:
+        app: my-pod # POD label
+    spec: # the specs below are for container
+      containers:
+      - name: my-container
+        image: arunsundaramco70/kd1
 

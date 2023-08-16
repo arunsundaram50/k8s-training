@@ -1,14 +1,15 @@
-import fastapi, os, uvicorn, nest_asyncio, random
+import fastapi, os, uvicorn, nest_asyncio, random, socket
 
 app = fastapi.FastAPI()
 PORT = os.environ.get('PORT', '8001')
+HOST_NAME = socket.gethostname()
 
 
 @app.get("/hello")
 def say_hello():
   random_number = random.randint(1, 100)
   return {
-    "message": f"Hola, world {random_number}"
+    "message": f"Hola, world {HOST_NAME=}, {random_number}"
   }
 
 nest_asyncio.apply()

@@ -13,7 +13,7 @@ func main() {
 	}
 	defer file.Close()
 
-	tw := NewTeeWriter(file, os.Stdout)
+	tw := NewTeeWriter(os.Stdout, file)
 	_, err = tw.Write([]byte("Hello, world1\n"))
 	if err != nil {
 		fmt.Println(err)
