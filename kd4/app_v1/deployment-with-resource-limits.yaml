@@ -25,3 +25,10 @@ spec:
         image: arunsundaramco70/app_v2
         ports:
         - containerPort: 8001
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100Mi"
+          limits:
+            memory: "128Mi"
+            cpu: "250Mi"
