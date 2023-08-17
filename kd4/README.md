@@ -1,1 +1,1 @@
-# k4. DRY with Helm
+# k3. Inter pod communication
