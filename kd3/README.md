@@ -1,4 +1,4 @@
-# Running a simple application
+# k3. Running a simple application
 
 Instead of jumping right into k8s, we will deploy the application starting in a simple way and incrementally we will do a k8s deploy. This will help us in many ways
 - allow us to test the application before making it part of a k8s deploy

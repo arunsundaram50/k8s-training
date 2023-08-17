@@ -1,4 +1,4 @@
-# kd2: A Tour of Deploting Application Using K8S
+# k2. A Tour of Deploying Application Using K8S
 
 We will deploy the application using kd1/deployment.yaml.
 This will create an unreachable set of pods.

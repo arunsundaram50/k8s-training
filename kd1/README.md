@@ -1,4 +1,4 @@
-# k1: Transitioning from Docker to K8S
+# k1. Transitioning from Docker to K8S
 
 ## Prerequisite --have the image ready and test
 In the world of docker, we build the image like so

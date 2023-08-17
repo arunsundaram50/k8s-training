@@ -1,4 +1,4 @@
-# Config Maps
+# k6. Config Maps
 
 ## Create and apply the ConfigMap
 ```bash
