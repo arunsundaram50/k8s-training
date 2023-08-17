@@ -1,5 +1,1 @@
-# k4. Scaling 
-
-## Scaling up and down manually
-## Auto scaling
-
+# k4. Users, permissions, and authentication
