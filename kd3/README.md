@@ -11,18 +11,18 @@ Also, we will summarize what we learn in each levels in the following table:
 |-|-|-|-|-|-|
 |Disowning Library Installation |x|x|√|
 |If using Python, user will have to use virtual environment to avoid library conflict with other applications running in the same host/machine|x|√|√|
-|||Creating §1||
-|Runs in an environment seperate from the host|x|√|√|
+|Runs in an environment seperate from the host|x|√ §1|√|
 |Oversight to bring service back up (if it crashes)|x|x|x|
 |There is oversight if it behaves badly (like take 100% CPU)|x|x|√|
 |There is way to scale it up|x|x|x|
 |Even if I run multiple instances to cope with the demand, scaling down is still manual|x|x|x|
 |Updating the application causes downtime|x|x|x|
 
-§1: 
+§1: Create a `virtual environment` so that the Python libraries installed don't mess with the host's library versions
 ```bash
 python3 -m venv venv_v1
 source venv_v1/bin/activate
+pip3 install -r requirements.txt
 python3 ./main.py
 ```
 

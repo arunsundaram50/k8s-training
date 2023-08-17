@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: upper
+  name: upper-pod
   labels:
     app: upper-app
 spec:

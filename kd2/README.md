@@ -6,42 +6,48 @@ To be able to reach the pod's containers, we will "front" the pods with a servic
 
 
 # Command Line Deployment and Service Creation
-## Create a deployment
-
-### make sure the image is in hub
+### make sure the image is published to the hub
 ```
-docker image build -t docker.io/arunsundaramco70/myhello .
-docker push docker.io/arunsundaramco70/myhello
+cd hello
+docker image build -t docker.io/arunsundaramco70/hello .
+docker push docker.io/arunsundaramco70/hello
 ```
 
 ### delete the standalone pod and create a deployment
 #### delete, if deployment exists:  kubectl delete deployment demo 
 ```
-kubectl delete pod demo
-kubectl create deployment demo --image=arunsundaramco70/myhello --port 8888
-kubectl describe deployment demo
+kubectl delete pod hello-pod
+kubectl create deployment hello-deployment --image=arunsundaramco70/hello --port 8001
+kubectl describe deployment hello-deployment
 ```
 
-### List services, see no load balancer is running, and there is no way to reach 8888
-#### delete, if services aleady exists: kubectl delete services demo
+### List services. Notice no load balancer is running, and there is no way to reach 8001
+(delete, if services aleady exists: kubectl delete services hello-service)
 ```
 kubectl get services
 ```
 
 
-### Expose service without LB to 8888
+### Expose service without LB to 8001
 ```
-kubectl expose deployment demo --type=NodePort --name=myhello-service --port=80 --target-port=8888
+kubectl expose deployment hello-deployment --type=NodePort --name=hello-service --port=80 --target-port=8001
 ```
+Note:
+- this doesn't expose the service to an IP as the service type is `NodePort`. §1
+- change the type to `--type=LoadBalancer` and see how you are able to hit the application using `localhost`
 
-### Find the Cluster-IP & use the port and hit it from the browser 
+
+#### §1: Find the Cluster-IP & use the port and hit it from the browser 
 ```
-kubectl get service myhello-service
+kubectl get service hello-service
 ```
 For example, if you see
 ```
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP        86m
-myhello-service   NodePort    10.104.191.51   <none>        80:30658/TCP   5m12s
+hello-service   NodePort    10.104.191.51   <none>        80:30658/TCP   5m12s
 ```
 we would hit <http://localhost:30658>
+
+## Enabling inter-pod communication
+Examine and use the `deployment.yaml` that allows for the `upper-pod` to talk to `hello-pod`

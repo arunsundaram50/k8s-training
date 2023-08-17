@@ -1,4 +1,0 @@
-fastapi
-uvicorn
-nest_asyncio
-requests
