@@ -1,8 +1,8 @@
-In the context of Kubernetes (k8s), a Container Network Interface (CNI) plugin is responsible for defining how the different containers within a cluster will communicate with each other. CNI plugins enable various networking features such as overlay networks, network policies, subnet management, etc.
+# DaemonSet for CNI/calico
+
+A Container Network Interface (CNI) plugin is responsible for defining how the different containers within a cluster will communicate with each other. CNI plugins enable various networking features such as overlay networks, network policies, subnet management, etc.
 
 Choosing an appropriate CNI plugin is essential to provide the required network functionality and performance to suit a specific use case. There are several different CNI plugins available such as Flannel, Calico, Weave, etc., each offering its own unique set of features and capabilities.
-
-The CKA (Certified Kubernetes Administrator) exam's topic related to "Services & Networking" ensures that candidates understand the various networking components in Kubernetes, including the selection and management of the correct CNI plugin.
 
 Here's how you might interact with a CNI plugin using Kubernetes commands:
 
