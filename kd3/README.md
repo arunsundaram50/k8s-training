@@ -62,6 +62,12 @@ kubectl run kd1 --image=arunsundaramco70/kd1 --port 8001 --labels app=kd1
 kubectl port-forward pod/kd1 8001
 ```
 
+### 3a) Running multiple replicas (as a deployment) and exposing the deployment
+```bash
+kubectl create deployment kd3-deployment --image=arunsundaramco70/kd3 --replicas=3
+kubectl expose deployment kd3-deployment --name=kd3-service --port=8001 --type=LoadBalancer
+```
+
 ### 4) Running the application in K8S (declarative) --i.e. using a deployment object declared in an YAML file, say `deployment.yaml`
 ```yaml
 apiVersion: apps/v1
@@ -139,4 +145,3 @@ Exposes the Service on each Node's IP at a static port (the NodePort). To make t
 Exposes the Service externally using an external load balancer. Kubernetes does not directly offer a load balancing component; you must provide one, or you can integrate your Kubernetes cluster with a cloud provider.
 ### ExternalName
 Maps the Service to the contents of the externalName field (for example, to the hostname api.foo.bar.example). The mapping configures your cluster's DNS server to return a CNAME record with that external hostname value. No proxying of any kind is set up.
-
