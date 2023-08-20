@@ -1,4 +1,4 @@
-# Ingress vs Service
+# k9. Ingress vs Service
 
 ## Service
 Service name becomes a DNS Name (inside of K8S Network), and it gives a stable hostname to access a set of pods (based on the matchingLabels)

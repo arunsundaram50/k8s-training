@@ -1,4 +1,4 @@
-# 8. DaemonSets
+# k8. DaemonSets
 
 A DaemonSet is a Kubernetes resource that ensures that some or all nodes in the cluster run a copy of a specific Pod. When a new node is added to the cluster, the DaemonSet automatically adds the required Pod to the new node. Conversely, if a node is removed from the cluster, those Pods are garbage collected.
 

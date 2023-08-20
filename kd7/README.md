@@ -1,1 +1,1 @@
-# kd5: Autoscaling
+# k5: Autoscaling

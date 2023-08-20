@@ -1,4 +1,4 @@
-# Using Ingress
+# k10. Using Ingress
 
 ```
 http://hello.my-server.com/ -> hello-service
