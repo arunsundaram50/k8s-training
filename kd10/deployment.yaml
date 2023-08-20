@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels:
+    app: hello-app
+spec:
+  containers:
+  - name: hello-container
+    image: arunsundaramco70/hello-image
+    ports:
+      - containerPort: 8001
+        name: http-web-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  selector:
+    app: hello-app
+  type: LoadBalancer
+  ports:
+  - name: front-end-port
+    protocol: TCP
+    port: 8088
+    targetPort: http-web-svc
+    nodePort: 30088
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: upper-pod
+  labels:
+    app: upper-app
+spec:
+  containers:
+  - name: upper-container
+    image: arunsundaramco70/upper
+    ports:
+      - containerPort: 8001
+        name: http-web-svc
+    env:
+      - name: "hello_host"
+        value: "hello-service"
+      - name: "hello_port"
+        value: "8088"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upper-service
+spec:
+  selector:
+    app: upper-app
+  type: LoadBalancer
+  ports:
+  - name: front-end-port
+    protocol: TCP
+    port: 8089
+    targetPort: http-web-svc
+    nodePort: 30089
+
