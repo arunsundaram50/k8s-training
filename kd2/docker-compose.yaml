@@ -1,0 +1,22 @@
+version: '3'
+services:
+  hello:
+    image: arunsundaramco70/hello
+    ports:
+      - "8001:8001"
+    networks:
+      - my_network
+
+  upper:
+    environment:
+      - hello_host=hello
+      - hello_port=8001
+    image: arunsundaramco70/upper
+    ports:
+      - "8002:8001"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

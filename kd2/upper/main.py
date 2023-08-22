@@ -10,7 +10,7 @@ HELLO_PORT = os.environ.get('hello_port')
 def get_upper(text):
   URL = f"http://{HELLO_HOST}:{HELLO_PORT}/hello/{text}"
   print(f"{URL=}", flush=True, file=sys.stderr)
-  resp = requests.get(URL)
+  resp = requests.get(URL) # contacts hello application
   print(resp.json(), flush=True, file=sys.stderr)
   message = resp.json()["message"]
   return {

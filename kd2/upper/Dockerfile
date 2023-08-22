@@ -1,6 +1,7 @@
 FROM python:alpine
 
 # RUN apt-get update && apt-get install -y python3-pip
+EXPOSE 8001
 
 # update the image with needed files
 COPY main.py main.py
@@ -11,5 +12,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # run the application
 CMD python3 ./main.py
-
-
