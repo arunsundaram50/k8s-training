@@ -5,10 +5,10 @@ metadata:
 spec:
   selector:
     app: upper-app
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: front-end-port
     protocol: TCP
-    port: 8088
+    port: 8089
     targetPort: http-web-svc
     nodePort: 30089

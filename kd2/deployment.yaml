@@ -60,4 +60,3 @@ spec:
     port: 8088
     targetPort: http-web-svc
     nodePort: 30089
-
