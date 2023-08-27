@@ -53,10 +53,26 @@ metadata:
 spec:
   selector:
     app: upper-app
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: front-end-port
     protocol: TCP
-    port: 8088
+    port: 8888
     targetPort: http-web-svc
-    nodePort: 30089
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: upper-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /upper
+        pathType: Prefix
+        backend:
+          service:
+            name: upper-service
+            port:
+              number: 8888
