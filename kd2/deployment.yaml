@@ -67,12 +67,23 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: "your-server.com"
+    http:
       paths:
-      - path: /upper
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: upper-service
+            port:
+              number: 8888
+  - host: "my-server.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-service
             port:
               number: 8888

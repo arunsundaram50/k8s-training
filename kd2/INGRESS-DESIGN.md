@@ -73,3 +73,7 @@ http://123.231.13.34:93434/cart-service
   => http://amazon.com/cart/items
   => http://cart.amazon.com/items
 ```
+
+
+http://my-server.com/upper/hello -> upper-service:8888 [SERVICE]-> 10.1.0.163:8001 [POD]
+                               INGRESS                       SERVICE

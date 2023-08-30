@@ -9,18 +9,9 @@ Here's a basic step-by-step guide for setting up a Kubernetes master node using 
 
    Just like adding a node to a cluster, first you need a machine with a compatible operating system. This could be a physical machine, a virtual machine in a local hypervisor, or an instance on a cloud provider.
 
-2. **Install Docker:**
 
-   Install Docker on your machine, as Kubernetes will use this to run its containers. Here's how you might do this on Ubuntu:
-
-   ```bash
-   sudo apt-get update
-   sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-   sudo apt-get update
-   sudo apt-get install docker-ce
-   ```
+2 **Install containerd**
+  See the [./CONTAINERD-INSTALL.md](continerd-install.md) documentation
 
 3. **Install Kubernetes:**
 
@@ -44,9 +35,9 @@ Here's a basic step-by-step guide for setting up a Kubernetes master node using 
 
    Now, you can initialize the master node. Use `kubeadm init` to do this:
 
-   ```bash
-   sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-   ```
+```bash
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+```
 
    The `--pod-network-cidr` option sets the range of IP addresses for the pod network. The exact range may depend on the network plugin you're using.
 
