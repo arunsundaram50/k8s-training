@@ -13,6 +13,7 @@ K8s example | User Account | Node | create |
 
 
 ### Setup a local user
+#### Certificate Generation part
 ```bash
 # localize
 mkdir cert && cd cert
@@ -21,11 +22,19 @@ openssl genrsa -out arunsundaram.key 2048
 # Generate CSR
 openssl req -new -key arunsundaram.key -out arunsundaram.csr -subj "/CN=arunsundaram/O=docker-training"
 # Generate a Cert
-openssl ×509 -req -in arunsundaram.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out arunsundaram.crt -days 364
-# 
+openssl x509 -req -in arunsundaram.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out arunsundaram.crt -days 364
+```
+#### K8s certification authentication part
+##### Let k8s know about the user
+```bash
 kubectl config set-credentials arunsundaram --client-certificate=arunsundaram.crt --client-key=arunsundaram.key
-# 
-kubectl config set-context arunsundaram-context --cluster=MY-CLUSTER --user=arunsundaram
+```
+
+##### Using the cert/arun
+Create a context, use it, and check it is set
+```bash
+# The CLUSTER_NAME would be docker-desktop or minikube
+kubectl config set-context arunsundaram-context --cluster=$CLUSTER_NAME --user=arunsundaram
 #
 kubectl config use-context arunsundaram-context
 #
