@@ -31,15 +31,13 @@ kubectl config set-credentials arunsundaram --client-certificate=arunsundaram.cr
 ```
 
 ##### Using the cert/arun
-Create a context, use it, and check it is set
 ```bash
-# The CLUSTER_NAME would be docker-desktop or minikube
+# Create a context. $CLUSTER_NAME would be docker-desktop or minikube
 kubectl config set-context arunsundaram-context --cluster=$CLUSTER_NAME --user=arunsundaram
-#
+# To assume/use a context
 kubectl config use-context arunsundaram-context
-#
+# To see the current context
 kubectl config current-context
-#
 ```
 
 ### Setup a serviceaccount
