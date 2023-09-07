@@ -38,8 +38,21 @@ minikube start --container-runtime=containerd
 kubectl describe node minikube
 ```
 
-### Stop
+## Stop minikube
 ```bash
 minikube stop
 ```
 
+## Remove minikube cluster (this leaves the minikube application)
+```bash
+minikube stop
+minikube delete --all
+# running this would make all the old setup go --probably invalidating any certs created using ~/.minkube/ca.crt cert etc.
+rm -rf ~/.minikube
+```
+
+## Create the minikube cluster
+```bash
+minikube start --container-runtime=containerd
+kubectl describe node minikube
+```
