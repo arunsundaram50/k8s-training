@@ -38,11 +38,30 @@ kubectl config set-context arunsundaram-context --cluster=$CLUSTER_NAME --user=a
 kubectl config use-context arunsundaram-context
 # To see the current context
 kubectl config current-context
+# To switch back to default context ($CONTEXT_NAME can be docker-desktop, minikube, etc.)
+kk config set-context $CONTEXT_NAME
+```
+
+#### To create a role
+```bash
+kk create role pod-list-role -n kube-system --resource=pods --verb="get,list,describe"
+```
+#### Bind the role to a subject (ex: user arunsundaram)
+```bash
+kk create rolebinding arunsundaram-pod-list-role-binding -n kube-system --role=pod-list-role --user=arunsundaram
+```
+#### Try these commands
+```bash
+kk get pods --namespace=kube-system # should work
+kk describe pod/etcd-minikube --namespace=kube-system # should work
+kk logs pod/etcd-minikube --namespace=kube-system # should NOT work
+kk events pod/etcd-minikube --namespace=kube-system # should NOT work
+kk delete pod/etcd-minikube --namespace=kube-system --dry-run=server # should NOT work, but ensure the role is not modified to allow delete
 ```
 
 ### Setup a serviceaccount
 ```bash
-k create serviceaccount pod-manager  
+k create serviceaccount pod-manager
 ```
 
 Create a role that can do everything with a pod
