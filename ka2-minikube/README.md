@@ -44,10 +44,11 @@ minikube stop
 ```
 
 ## Remove minikube cluster (this leaves the minikube application)
+Running this (even if we don't run rm -rf ~/.minikube) would make all the old setup go --probably invalidating any certs created using ~/.minkube/ca.crt cert etc.
 ```bash
 minikube stop
 minikube delete --all
-# running this would make all the old setup go --probably invalidating any certs created using ~/.minkube/ca.crt cert etc.
+# optional
 rm -rf ~/.minikube
 ```
 
