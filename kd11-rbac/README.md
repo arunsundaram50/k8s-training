@@ -9,7 +9,7 @@ K8s example | User Account | Node | create |
 
 - SUBJECT: Role, User, Service account
 - RESOURCE: Pod, Node, ConfigMap, Deployment, Service, Ingress, etc.
-- VERB: Describe, delete, create, apply, etc.
+- VERB: get, delete, create, apply, etc.
 
 
 ### Setup a local user
@@ -40,16 +40,21 @@ kubectl config use-context arunsundaram-context
 kubectl config current-context
 # To switch back to default context ($CONTEXT_NAME can be docker-desktop, minikube, etc.)
 kk config set-context $CONTEXT_NAME
+# To list all contexts
+kk config get-contexts
+# To delete
+kk config delete-context arunsundaram-context
 ```
 
 #### To create a role
 ```bash
-kk create role pod-list-role -n kube-system --resource=pods --verb="get,list,describe"
+kk create role pod-list-role -n kube-system --resource=pods --verb="get,list"
 ```
 #### Bind the role to a subject (ex: user arunsundaram)
 ```bash
 kk create rolebinding arunsundaram-pod-list-role-binding -n kube-system --role=pod-list-role --user=arunsundaram
 ```
+
 #### Try these commands
 ```bash
 kk get pods --namespace=kube-system # should work

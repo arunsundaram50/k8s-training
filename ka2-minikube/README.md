@@ -56,4 +56,7 @@ rm -rf ~/.minikube
 ```bash
 minikube start --container-runtime=containerd
 kubectl describe node minikube
+minikube ip # to get the IP of the apiserver (ensure this is what is set in ~/.minikube/config)
+# make sure CONTEXT_NAME is minikube
+kubectl config use-context $CONTEXT_NAME
 ```
