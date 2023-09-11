@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-<<<<<<< HEAD
-  name: xyz-service
+  name: my-service
 spec:
+  type: LoadBalancer
   selector:
     name: xyz
   ports:
@@ -15,25 +15,4 @@ spec:
       port: 8000
       targetPort: 8002
       container: c2
-  type: LoadBalancer
-=======
-  name: my-service
-spec:
-<<<<<<<< HEAD:kd2/service.yaml
-  type: LoadBalancer
-========
-  type: NodePort
->>>>>>>> 56ed408cdd784227e3bb6aea30db384a12f81f7b:kd1/service.yaml
-  selector:
-    app: my-pod
-  ports:
-    - protocol: TCP
-<<<<<<<< HEAD:kd2/service.yaml
-      port: 8000
-      targetPort: 8001
-========
-      port: 8005 # the port we expose to the end-user
-      targetPort: 8001 # container port that k8s will forward the request to
   sessionAffinity: None
->>>>>>>> 56ed408cdd784227e3bb6aea30db384a12f81f7b:kd1/service.yaml
->>>>>>> 56ed408cdd784227e3bb6aea30db384a12f81f7b
