@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello-world-cronjob
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello-world
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - "echo 'Hello World' >> /data/greetings.txt"
+            volumeMounts:
+            - name: data-volume
+              mountPath: /data
+          volumes:
+          - name: data-volume
+            hostPath:
+              path: /Users/arunsundaram/apps/docker-training/kd12-cronjob/data
+              type: DirectoryOrCreate
+          restartPolicy: OnFailure
