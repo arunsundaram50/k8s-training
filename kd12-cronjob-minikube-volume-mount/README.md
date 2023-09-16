@@ -9,16 +9,20 @@ To access files from our local filesystem inside our pod running in Minikube, yo
    
 2. Run the following command to mount our local directory into the Minikube VM:
 
-   ```sh
-   minikube mount /home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data:/home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data
-   ```
+```sh
+sudo ufw allow 43397
+minikube mount /home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data:/home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data --port=43397
+nohup minikube mount /home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data:/home/asundaram/apps/docker-training/kd12-cronjob-minikube-volume-mount/data --port=43397 &
+```
 
 3. In our pod configuration YAML file, continue using the same `hostPath` configuration as before, since from the perspective of the Pod running in Minikube, it's now referring to a path inside the Minikube VM.
 
 4. Apply our Pod configuration to create the Pod:
 
    ```sh
-   kubectl apply -f mypod.yaml
+   kubectl apply -f cron.yaml
+   # or
+   kubectl apply -f basic.yaml
    ```
 
 5. Verify that the mount is working correctly by creating files in the mounted directory from our local system and checking if they appear in the `/data` directory inside our Pod.

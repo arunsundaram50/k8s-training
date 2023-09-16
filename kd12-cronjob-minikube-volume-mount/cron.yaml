@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: hello-world-cronjob
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
@@ -12,9 +12,9 @@ spec:
           - name: hello-world
             image: busybox
             args:
-            - /bin/sh
+            - /bin/bash
             - -c
-            - "echo 'Hello World $(date)' >> /data/greetings.txt"
+            - "echo 'Hello World2 $(date)' >> /data/greetings.txt"
             volumeMounts:
             - name: data-volume
               mountPath: /data
