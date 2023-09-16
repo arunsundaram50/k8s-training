@@ -27,7 +27,7 @@ minikube version
 # Step 1: Validate containerd Status
 sudo systemctl status containerd
 # Step 2: Verify containerd Socket
-ls /run/containerd/containerd.sock 
+ls /run/containerd/containerd.sock
 ```
 
 #### ...and start minikube control plane
