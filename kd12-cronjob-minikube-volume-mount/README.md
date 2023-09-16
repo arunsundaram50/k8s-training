@@ -19,11 +19,11 @@ nohup minikube mount /home/asundaram/apps/docker-training/kd12-cronjob-minikube-
 
 4. Apply our Pod configuration to create the Pod:
 
-   ```sh
-   kubectl apply -f cron.yaml
-   # or
-   kubectl apply -f basic.yaml
-   ```
+```sh
+kubectl apply -f cron.yaml
+# or
+kubectl apply -f basic.yaml
+```
 
 5. Verify that the mount is working correctly by creating files in the mounted directory from our local system and checking if they appear in the `/data` directory inside our Pod.
 
