@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-world-cronjob
+spec:
+  schedule: "0 10 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello-world
+            image: busybox
+            args:
+            - /bin/bash
+            - -c
+            - "echo 'Hello World2 $(date)' >> greetings.txt"
