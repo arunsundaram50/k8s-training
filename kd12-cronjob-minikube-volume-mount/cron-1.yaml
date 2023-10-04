@@ -3,15 +3,16 @@ kind: CronJob
 metadata:
   name: hello-world-cronjob
 spec:
-  schedule: "0 10 * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
         spec:
+          restartPolicy: Never
           containers:
           - name: hello-world
-            image: busybox
+            image: alpine
             args:
-            - /bin/bash
+            - /bin/sh
             - -c
-            - "echo 'Hello World2 $(date)' >> greetings.txt"
+            - "echo 'Hello World2 $(date)' >> /data/greetings.txt; sleep 360"
