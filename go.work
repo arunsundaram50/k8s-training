@@ -1,3 +1,6 @@
 go 1.21.0
 
-use ./kd12-cronjob-minikube-volume-mount/multi-stage-build
+use (
+	./kd12-cronjob-minikube-volume-mount/multi-stage-build
+	./kd14-custom-controller
+)
