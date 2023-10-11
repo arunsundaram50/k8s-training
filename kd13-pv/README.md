@@ -12,3 +12,18 @@ kubectl exec -it mypod -- /bin/sh
 ls /data
 ```
 
+PV [host dir/SAN/etc] -> PVC -> POD/Volume [PVC] -> Container VolumeMount [Volume] -> /data
+
+pod1, pod2, pod3...
+  ^
+  |
+Node 
+  ^
+  |
+Kubernetes [Docker container]
+  ^
+  |
+Docker Desktop 
+  ^
+  |
+iMac 
