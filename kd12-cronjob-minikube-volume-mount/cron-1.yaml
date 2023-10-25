@@ -2,9 +2,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: hello-world-cronjob
-spec:
+spec: # cron specification
   schedule: "* * * * *"
-  jobTemplate:
+  jobTemplate: # pod specification
     spec:
       template:
         spec:
@@ -15,4 +15,4 @@ spec:
             args:
             - /bin/sh
             - -c
-            - "echo 'Hello World2 $(date)' >> /data/greetings.txt; sleep 360"
+            - mkdir /data; echo 'Hello World2 $(date)' >> /data/greetings.txt; sleep 360
