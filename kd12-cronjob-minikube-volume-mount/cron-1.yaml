@@ -15,4 +15,4 @@ spec: # cron specification
             args:
             - /bin/sh
             - -c
-            - mkdir /data; echo 'Hello World2 $(date)' >> /data/greetings.txt; sleep 360
+            - badCommand && mkdir /data; echo 'Hello World2 $(date)' >> /data/greetings.txt; sleep 360
