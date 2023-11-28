@@ -10,8 +10,9 @@ Here's a basic step-by-step guide for setting up a Kubernetes master node using 
    Just like adding a node to a cluster, first you need a machine with a compatible operating system. This could be a physical machine, a virtual machine in a local hypervisor, or an instance on a cloud provider.
 
 
-2 **Install containerd**
-  See the [./CONTAINERD-INSTALL.md](continerd-install.md) documentation
+2. **Install containerd**
+
+   See the [./CONTAINERD-INSTALL.md](continerd-install.md) documentation
 
 3. **Install Kubernetes:**
 
@@ -32,8 +33,19 @@ Here's a basic step-by-step guide for setting up a Kubernetes master node using 
    - `kubectl`, which you can use to interact with your cluster.
 
 4. **Initialize the Master Node:**
-
+   Note: Ensure that the CRI plugin is enabled. You might need to uncomment or add lines related to the CRI plugin.
+   ```
+   vi /etc/containerd/config.toml
+   ```
+   and comment out CRI, like so:
+   ```
+   # disabled_plugins = ["cri"]
+   ```
    Now, you can initialize the master node. Use `kubeadm init` to do this:
+   And then restart containerd
+   ```
+   sudo systemctl restart containerd
+   ```
 
 ```bash
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16

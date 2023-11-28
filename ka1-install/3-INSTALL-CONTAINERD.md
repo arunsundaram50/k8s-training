@@ -1,4 +1,4 @@
-## Here's how you can install `containerd` on Ubuntu:
+## How to install `containerd` on Ubuntu:
 
 1. **Update and Install Dependencies**:
 

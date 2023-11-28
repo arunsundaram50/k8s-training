@@ -18,6 +18,23 @@ http://upper.my-server.com/ -> upper-service
 
 It's roughly equivalent to AWS Route 55, Ngnix and Apache Web Server Routing
 
+## Installing Ingress controller in a Minikube (say, Linux) setup
+Check if the add-on is already there
+```
+minikube addons list
+```
+If it is disabled, enable it using
+```
+minikube addons enable ingress
+```
+And then, Check Ingress Controller Pods
+```
+kubectl get pods -n kube-system
+```
+And, Check Ingress Controller Service
+```
+kubectl get svc -n kube-system
+```
 
 ## Installing Ingress controller in an iMac
 - brew install helm
