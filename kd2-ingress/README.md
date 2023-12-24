@@ -41,12 +41,14 @@ Note:
 ```
 kubectl get service hello-service
 ```
+
 For example, if you see
 ```
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP        86m
 hello-service   NodePort    10.104.191.51   <none>        80:30658/TCP   5m12s
 ```
+
 we would hit <http://localhost:30658>
 
 ## Enabling inter-pod communication
