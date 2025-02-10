@@ -12,7 +12,7 @@ Here's a basic step-by-step guide for setting up a Kubernetes master node using 
 
 2. **Install containerd**
 
-   See the [./CONTAINERD-INSTALL.md](continerd-install.md) documentation
+   See the [3-INSTALL-CONTAINERD.md](3-INSTALL-CONTAINERD.md) documentation
 
 3. **Install Kubernetes:**
 

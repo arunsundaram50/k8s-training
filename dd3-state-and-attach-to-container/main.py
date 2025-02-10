@@ -1,7 +1,7 @@
 import fastapi
 
 app = fastapi.FastAPI()
-access_count = 0
+access_count = 0 # Showoff state across requests for the life-time of the container!
 
 @app.get("/hello")
 def say_hello():
