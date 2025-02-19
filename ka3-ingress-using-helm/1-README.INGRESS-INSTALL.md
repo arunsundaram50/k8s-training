@@ -37,18 +37,26 @@ kubectl get svc -n kube-system
 ```
 
 ## Installing Ingress controller in an iMac
-- brew install helm
-- helm version
-- kubectl config use-context docker-desktop
-- helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-- kubectl create namespace ingress-controller
-- helm install my-ingress ingress-nginx/ingress-nginx --namespace ingress-controller
+```
+brew install helm
+helm version
+kubectl config use-context docker-desktop
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+kubectl create namespace ingress-controller
+helm install my-ingress ingress-nginx/ingress-nginx --namespace ingress-controller
+```
 
 ### To check the status
-- k get pods -n ingress-controller
+```
+k get pods -n ingress-controller
+```
 
 ### To delete
-- helm uninstall my-ingress -n ingress-controller
+```
+helm uninstall my-ingress -n ingress-controller
+```
 
 ### To "activate" it again
-- helm install my-ingress ingress-nginx/ingress-nginx --namespace ingress-controller
+```
+helm install my-ingress ingress-nginx/ingress-nginx --namespace ingress-controller
+```
